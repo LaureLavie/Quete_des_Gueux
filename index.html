@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./style.css" />
+<script type="module" src="./map.js" defer></script>
+<script type="module" src="./script.js" defer></script>
+  <title>🎻 La Quête des Gueux 🎻</title>
+</head>
+<body>  
+<div id="intro-screen" class="intro-screen">
+  <div class="intro-content">
+    <h1>🎻 La Quête des Gueux 🎻</h1>
+    <p>
+      "Oyé, oyé, Braves Chevaliers de la table Ronde !<br /><br />
+      Le roi Arthur s'est vu confier par la Dame du Lac une mission d'une subtilité rare :
+      dénicher un trésor inestimable, planqué dans un labyrinthe miteux.<br /><br />
+      Votre tâche ? Cartographier le royaume, trouver l'entrée du labyrinthe,
+      et guider Arthur, qui confond souvent « chemin le plus court » et « chemin vers la taverne ».
+      Seuls les esprits affûtés, capables de dompter les arcanes des algorithmes,<br />
+      pourront éviter de finir dans les latrines, en compagnie des rats et des poux.<br /><br />
+      Si par miracle vous chopez le magot… ramenez-le donc au roi Arthur.<br />
+      Sinon, vous finirez dans les latrines, avec les rats et les poux."
+    </p>
+    <button class="btn" onclick="showMap()">
+      Commencer la Quête des gueux
+    </button>
+  </div>
+</div>
+
+<div id="map-screen" class="map-screen">
+  <div class="map-content">
+    <h2>🗺️ Royaume de Kaamelott</h2>
+    <p>Trouvez les 3 points de passage pour accéder au labyrinthe Maze'Lott !</p>
+    <div id="mapDiv">
+       <img src="./royaume.png" svg width="90% viewBox="0 0 700 500">
+        <!-- Arrière-plan de la carte -->
+        <rect width="700" height="500" fill="#f4e4bc" stroke="#8b4513" stroke-width="4" />
+
+        <!-- Contours de l'île -->
+        <path
+          d="M100,150 Q200,100 300,120 Q400,90 500,130 Q600,110 650,160 Q700,200 680,300 Q650,400 600,450 Q500,480 400,470 Q300,490 200,460 Q150,400 120,350 Q80,250 100,150 Z"
+          fill="#e8d5b7" stroke="#8b4513" stroke-width="2" />
+
+        <!-- Forêts -->
+        <!-- <circle cx="200" cy="200" r="40" fill="#228b22" opacity="0.6" />
+        <circle cx="350" cy="180" r="35" fill="#228b22" opacity="0.6" />
+        <circle cx="500" cy="250" r="45" fill="#228b22" opacity="0.6" /> -->
+
+        <!-- Montagnes -->
+        <!-- <polygon points="300,200 320,160 340,200" fill="#8b4513" />
+        <polygon points="450,180 470,140 490,180" fill="#8b4513" />
+        <polygon points="380,220 400,180 420,220" fill="#8b4513" /> -->
+
+        <!-- Rivières -->
+        <!-- <path d="M150,250 Q250,240 350,260 Q450,280 550,270" stroke="#4682b4" stroke-width="8" fill="none"
+          opacity="0.7" /> -->
+
+        <!-- Kaamelott (château principal) -->
+        <!-- <rect x="240" y="240" width="30" height="30" fill="#8b4513" />
+        <polygon points="255,240 255,220 275,230" fill="#654321" />
+        <text x="280" y="235" font-family="serif" font-size="12" fill="#654321">Kaamelott</text>
+      </img> -->
+      <!-- Les marqueurs seront ajoutés ici dynamiquement -->
+    </div>
+    <div id="map-status">
+      Points de passage trouvés: <span id="waypoints-found">0</span>/3
+    </div>
+  </div>
+</div>
+
+<div class="message-popup" id="messagePopup"></div>
+
+<div class="header">
+  <h1>🏰 Maze'Lott - Quête des Gueux 🏰</h1>
+  <p>"Quête de bouseux pour un Trésor de Pouilleux !"</p>
+</div>
+<div class="controls">
+  <div class="size-controls">
+    <label>Largeur:</label>
+    <input type="number" id="width" value="25" min="10" max="50" />
+    <label>Hauteur:</label>
+    <input type="number" id="height" value="25" min="10" max="50" />
+    </div>
+  <button class="btn" onclick="generateMaze()">
+    🗝️ Nouveau Maze'Lott
+  </button>
+  <button class="btn" onclick="showOptimalPath()">
+    🗺️ Chemin optimal des Gueux
+  </button>
+  <button class="btn" onclick="resetGame()">
+    🔄 Recommence ! C'est le bordel, chef !
+  </button>
+</div>
+<div class="game-container">
+  <div class="maze-container">
+    <div id="maze" class="maze"></div>
+  </div>
+  <div class="info-panel">
+    <h3>⚔️ Grimoire du Bouseux ⚔️</h3>
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color wall"></div>
+        <span>Murs crasseux</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color path"></div>
+        <span>Chemins boueux</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color start">🏰</div>
+        <span>Taudis de départ</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color exit">🚪</div>
+        <span>Sortie vers la liberté</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color path">💰</div>
+        <span>Butin planqué (invisible)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color path">🗺️</div>
+        <span>Indices de bouseux (invisibles)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color player">👑</div>
+        <span>Votre misérable personne</span>
+      </div>
+    </div>
+    <div class="controls-info">
+      <h4>🎮 Grimoire du Bouseux</h4>
+      <p>⌨️ Flèches : Traîner vos guêtres</p>
+      <p>🖱️ Clic : Déplacer votre carcasse</p>
+      <p>🗺️ 5 indices de bouseux vous guident</p>
+      <p>🎯 But : Choper le butin et se barrer !</p>
+    </div>
+    <div class="stats" id="stats">
+      <div><strong>🏰 Quête des Pouilleux en cours...</strong></div>
+      <div>📍 Position: <span id="position">Taudis</span></div>
+      <div>👣 Pas du cul-terreux: <span id="steps">0</span></div>
+      <div>🗺️ Waypoints trouvés: <span id="waypoints">0</span></div>
+      <div>💰 Butin: <span id="treasure-status">Que dalle !</span></div>
+      <div>🏆 État: <span id="status">En galère</span></div>
+    </div>
+  </div>
+</div>
+<div class="game-over" id="gameOver">
+  <h2>🎉 Bravo Bouseux ! 🎉</h2>
+  <p>T'as chopé le butin et t'es sorti de ce bourbier !</p>
+  <p>Pas de la carcasse: <span id="final-steps"></span></p>
+  <p>Waypoints découverts: <span id="final-waypoints"></span>/5</p>
+  <button class="btn" onclick="closeGameOver()">Continuer à Glander</button>
+</div>
+</body>
+
+</html>
