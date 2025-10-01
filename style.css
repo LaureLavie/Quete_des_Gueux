@@ -145,8 +145,12 @@ body {
 }
 
 @keyframes entrance-pulse {
-  0% { box-shadow: 0 0 20px #ff6b35; }
-  100% { box-shadow: 0 0 40px #ff6b35, 0 0 60px #ff6b35; }
+  0% {
+    box-shadow: 0 0 20px #ff6b35;
+  }
+  100% {
+    box-shadow: 0 0 40px #ff6b35, 0 0 60px #ff6b35;
+  }
 }
 
 .entrance-marker:hover {
@@ -163,9 +167,9 @@ body {
   padding: 20px 30px;
   border-radius: 15px;
   font-weight: bold;
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   z-index: 2100;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
   border: 2px solid #8b4513;
   max-width: 80%;
   text-align: center;
@@ -283,16 +287,6 @@ body {
 }
 
 .maze-container {
-  background: linear-gradient(
-      135deg,
-      rgba(62, 39, 35, 0.8),
-      rgba(101, 67, 33, 0.6)
-    ),
-    radial-gradient(circle, rgba(139, 69, 19, 0.3), rgba(77, 51, 25, 0.5));
-  border: 6px solid #8b4513;
-  border-radius: 20px;
-  padding: 15px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), inset 0 4px 8px rgba(0, 0, 0, 0.4);
   position: relative;
 }
 
@@ -358,6 +352,7 @@ body {
   font-size: 16px;
   cursor: pointer;
   border: 1px solid rgba(101, 67, 33, 0.3);
+  border-radius: 50%;
 }
 
 .wall {
@@ -629,7 +624,9 @@ body {
 }
 
 /* Masquer les sections du jeu par défaut */
-.header, .controls, .game-container {
+.header,
+.controls,
+.game-container {
   display: none;
 }
 
