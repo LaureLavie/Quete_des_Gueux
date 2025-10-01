@@ -112,12 +112,13 @@ export function handleWaypointClick(marker, feature, isGoodHint) {
   document.getElementById("waypoints-found").textContent = visitedWaypoints;
 
   if (visitedWaypoints >= 3) {
+    // On affiche d'abord le message, puis l'entrée après le délai du message
+    showMessage(
+      "🎉 L'entrée du légendaire Maze'Lott est maintenant accessible ! Cliquez dessus pour entrer !"
+    );
     setTimeout(() => {
       document.getElementById("maze-entrance").style.display = "flex";
-      showMessage(
-        "🎉 L'entrée du légendaire Maze'Lott est maintenant accessible ! Cliquez dessus pour entrer !"
-      );
-    }, 2000);
+    }, 1500); // 1500ms = durée d'affichage du message
   }
 }
 

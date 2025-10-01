@@ -488,14 +488,14 @@ body {
   gap: 12px;
   padding: 5px;
   background: rgba(101, 67, 33, 0.3);
-  border-radius: 8px;
+  border-radius: 25px;
   border: 1px solid #654321;
 }
 
 .legend-color {
   width: 28px;
   height: 28px;
-  border-radius: 6px;
+  border-radius: 50%;
   border: 2px solid #8b4513;
   display: flex;
   align-items: center;
