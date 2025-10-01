@@ -13,7 +13,6 @@ body {
       transparent 50%
     ),
     url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23654321" opacity="0.2"/><circle cx="30" cy="40" r="0.5" fill="%234d3319" opacity="0.3"/><circle cx="70" cy="20" r="1.5" fill="%233e2723" opacity="0.1"/><circle cx="50" cy="80" r="0.8" fill="%23654321" opacity="0.2"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-  min-height: 100vh;
   color: #d2b48c;
   overflow-x: auto;
 }
@@ -21,6 +20,7 @@ body {
 .intro-screen {
   position: fixed;
   inset: 0;
+  height: 100vh;
   background: radial-gradient(circle, #2c1a0c 0%, #1a0d05 100%);
   color: #e0c097;
   display: flex;
@@ -159,7 +159,7 @@ body {
 
 .message-popup {
   position: fixed;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: linear-gradient(45deg, #3e2723, #654321, #8b4513);
