@@ -178,6 +178,9 @@ body {
 }
 
 .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   padding: 20px;
   background: linear-gradient(
@@ -218,7 +221,7 @@ body {
     -1px -1px 2px rgba(139, 69, 19, 0.8);
   color: #d2b48c;
   margin-bottom: 10px;
-  transform: rotate(-1deg);
+  transform: rotate(-3deg);
   letter-spacing: 2px;
 }
 
